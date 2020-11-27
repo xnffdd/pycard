@@ -161,7 +161,7 @@ def mono_bin_fit(df: pd.DataFrame,
             if (a.loc[[left_pos, right_pos], ['total', 'bad', 'good']] < [min_total, min_bad, min_good]).any(axis=None):
                 a.at[left_pos, 'woe_diff'] += -min_woe_diff - 2 * big_number  # woe_diff -inf
 
-        pos = a[a['del'] == 0]['woe_diff'].argmin()
+        pos = a[a['del'] == 0]['woe_diff'].reset_index(drop=True).idxmin()
         assert pos >= 0
         left_pos = idx[pos]
         right_pos = idx[pos + 1]
